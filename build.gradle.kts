@@ -19,7 +19,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$verKotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$verKotlin")
 
-    implementation("io.vertx:vertx-web-api-contract:$verVertx")
     implementation("org.asynchttpclient:async-http-client:$verAsyncHttp")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$verJunitJupiter")

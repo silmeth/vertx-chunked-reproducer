@@ -24,10 +24,12 @@ class ChunkedTest {
             .map { it.exceptionHandler { e -> testFinished.fail(e) } }
             .compose(HttpClientRequest::connect)
             .compose { res ->
+                System.err.println("chunkedResponse: received response!")
                 assertEquals(200, res.statusCode())
                 res.body().map { res to it }
             }
             .onSuccess { (res, body) ->
+                System.err.println("chunkedResponse: received body!")
                 assertEquals("true", res.getTrailer("finished"))
                 assertEquals("chunk 1chunk 2final chunk", body.toString(Charsets.UTF_8))
                 testFinished.done()
@@ -51,10 +53,12 @@ class ChunkedTest {
             .map { it.exceptionHandler { e -> testFinished.fail(e) } }
             .compose(HttpClientRequest::connect)
             .compose { res ->
+                System.err.println("chunkedResponseHeaderHack: received response!")
                 assertEquals(200, res.statusCode())
                 res.body().map { res to it }
             }
             .onSuccess { (res, body) ->
+                System.err.println("chunkedResponseHeaderHack: received body!")
                 assertEquals("true", res.getTrailer("finished"))
                 assertEquals("chunk 1chunk 2final chunk", body.toString(Charsets.UTF_8))
                 testFinished.done()
@@ -75,6 +79,7 @@ class ChunkedTest {
                 client.prepareGet("http://localhost:$port/").execute().toCompletableFuture()
             }
             .thenApplyAsync { res ->
+                System.err.println("async-http-client: received response and body!")
                 assertEquals(200, res.statusCode)
                 assertEquals("true", res.getHeader("finished"))
                 assertEquals("chunk 1chunk 2final chunk", res.responseBody)
