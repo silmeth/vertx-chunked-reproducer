@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val verKotlin = "1.5.21"
-val verVertx = "4.1.2"
+val verVertx = "4.1.4"
 val verJunitJupiter = "5.7.1"
 val verAsyncHttp = "2.11.0"
 
